@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const bookList = [  ]
+
+
+
+        class movie {
+            constructor ( actor , whatched , imdb , name , subject , director){
+                this.name = name
+                this.imdb = imdb
+                this.subject = subject
+                this.actor = actor
+                this.director = director
+                this.subject = subject
+                this.whatched = whatched
+            }
+
+        }
+        class Music {
+            constructor ( image , name , artist , isFav , file){
+                this.image = image
+                this.name = name
+            }
+        }
+
+
+        function Book( neme , image , author , page , price){
+            this.name = name
+            this.image = image
+            this.author = author
+            this.page = page
+            this.price = price
+            this.isRead = false
+
+            this.toggleRead =  ()=>{
+                this.isRead = !this.isRead
+
+            }
+
+        }
+
+        function insertBook(){
+            let name = prompt("enter name")
+
+            let book = new Book ( name)
+
+            bookList.push(book)
+        }
+        
+
+
+
+    </script>
+</body>
+</html>

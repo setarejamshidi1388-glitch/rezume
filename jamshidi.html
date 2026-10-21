@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ol id="mylist">
+
+    </ol>
+    <script>
+        const mylist = document.getElementById("mylist")
+        
+        const students = [ 'Ali' , 'Ahmad' , 'Amir' , 'hessam' , 'Mammad']
+        const number = prompt (" Enter Yor number")
+        const index = prompt("")
+
+        students.splice( index - 1, 1)
+        
+        
+        for (let i = 0 ; i < students.length ; i++ ) {
+            mylist.innerHTML += `<li> ${ students[i] } </li>`
+        }
+        
+    </script>
+</body>
+</html>

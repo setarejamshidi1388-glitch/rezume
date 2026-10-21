@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h5 id="name"></h5>
+    <h4>your name is</h4>
+    <h5 id="age"></h5>
+    <h4>your age is</h4>
+    <h5 id="phone"></h5>
+    <script>
+        
+       const name = prompt("Enter your name")
+       const age = prompt("Enter your age")
+       const phone = prompt("Enter your phone")
+       alert("hi" + name + " Your name is : " + phone + " and you are " + age + "years old")
+        
+       document.getElementById(name).innerText = `Hello ${ name }, You Are ${ age } Yrars Old And Your Phone is ${phone}`
+
+    </script>
+    <h1 id="speed"></h1>
+    <script>
+        const userspeed = prompt(" Enter Your speed ? ")
+        const minspeed = 60
+        const maxspeed = 120
+        Math.random()
+        if ( maxspeed > userspeed ) {
+            alert("pool bede")
+        } else if ( minspeed > userspeed){
+            alert("poooool zooor bede")
+        }
+        else{
+            alert("boro inja vaynast")
+        }
+
+    </script>
+    <script>
+        alert(  Math.ceil() * 100)
+        const systemnumber = Math.ceil(Math.random( ) * 100)
+        
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinema Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <h1>🎬 CINEMA HUB</h1>
+        <p>Manage your favorite movies</p>
+    </header>
+
+    <main class="container">
+
+        <section class="form-section">
+            <h2>Add New Movie</h2>
+
+            <form id="movieForm">
+                <div class="form-grid">
+
+                    <div class="input-group">
+                        <label for="name">Movie Name</label>
+                        <input type="text" id="name"
+                               placeholder="Enter movie name" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="actor">Actor</label>
+                        <input type="text" id="actor"
+                               placeholder="Enter actor" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="director">Director</label>
+                        <input type="text" id="director"
+                               placeholder="Enter director" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="subject">Genre</label>
+                        <select id="subject" required>
+                            <option value="">Select genre</option>
+                            <option>Action</option>
+                            <option>Drama</option>
+                            <option>Comedy</option>
+                            <option>Horror</option>
+                            <option>Sci-Fi</option>
+                            <option>Romance</option>
+                            <option>Thriller</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="imdb">IMDb Rating</label>
+                        <input type="number" id="imdb"
+                               min="0" max="10" step="0.1"
+                               placeholder="0 - 10" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="image">Poster Image URL</label>
+                        <input type="url" id="image"
+                               placeholder="https://example.com/poster.jpg">
+                    </div>
+
+                </div>
+
+                <label class="checkbox-label">
+                    <input type="checkbox" id="watched">
+                    I have watched this movie
+                </label>
+
+                <button type="submit" class="add-btn">
+                    + Add Movie
+                </button>
+            </form>
+        </section>
+
+        <section class="movies-section">
+            <div class="section-heading">
+                <h2>My Movies</h2>
+                <span id="movieCount">0 Movies</span>
+            </div>
+
+            <div id="movieList" class="movie-grid"></div>
+        </section>
+
+    </main>
+
+    <script>
+        const movieList = [];
+
+        class Movie {
+            constructor(actor, watched, imdb, name,
+                        subject, director, image) {
+                this.name = name;
+                this.imdb = imdb;
+                this.subject = subject;
+                this.actor = actor;
+                this.director = director;
+                this.watched = watched;
+                this.image = image;
+            }
+        }
+
+        const form = document.getElementById("movieForm");
+        const list = document.getElementById("movieList");
+        const count = document.getElementById("movieCount");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const actor = document.getElementById("actor").value.trim();
+            const director = document.getElementById("director").value.trim();
+            const subject = document.getElementById("subject").value;
+            const imdb = Number(document.getElementById("imdb").value);
+            const image = document.getElementById("image").value.trim();
+            const watched = document.getElementById("watched").checked;
+
+            if (imdb < 0 || imdb > 10) {
+                alert("IMDb rating must be between 0 and 10.");
+                return;
+            }
+
+            const movie = new Movie(
+                actor, watched, imdb, name,
+                subject, director, image
+            );
+
+            movieList.push(movie);
+            renderMovies();
+            form.reset();
+        });
+
+        function renderMovies() {
+            list.replaceChildren();
+            count.textContent = `${movieList.length} Movies`;
+
+            if (movieList.length === 0) {
+                list.innerHTML =
+                    '<p class="empty">No movies yet. Add your first movie!</p>';
+                return;
+            }
+
+            movieList.forEach(function(movie, index) {
+                const card = document.createElement("article");
+                card.className = "movie-card";
+
+                const poster = document.createElement("div");
+                poster.className = "poster";
+
+                if (movie.image) {
+                    const img = document.createElement("img");
+                    img.src = movie.image;
+                    img.alt = movie.name + " poster";
+                    img.onerror = function() {
+                        img.remove();
+                        poster.textContent = "🎬";
+                    };
+                    poster.appendChild(img);
+                } else {
+                    poster.textContent = "🎬";
+                }
+
+                const info = document.createElement("div");
+                info.className = "movie-info";
+
+                const title = document.createElement("h3");
+                title.textContent = movie.name;
+
+                const genre = document.createElement("span");
+                genre.className = "genre";
+                genre.textContent = movie.subject;
+
+                const rating = document.createElement("p");
+                rating.className = "rating";
+                rating.textContent = `⭐ ${movie.imdb} / 10`;
+
+                const actor = document.createElement("p");
+                actor.textContent = `Actor: ${movie.actor}`;
+
+                const director = document.createElement("p");
+                director.textContent = `Director: ${movie.director}`;
+
+                const status = document.createElement("p");
+                status.className = "status";
+                status.textContent = movie.watched
+                    ? "✓ Watched"
+                    : "○ Not watched";
+
+                const toggle = document.createElement("button");
+                toggle.className = "toggle-btn";
+                toggle.textContent = movie.watched
+                    ? "Mark as not watched"
+                    : "Mark as watched";
+
+                toggle.addEventListener("click", function() {
+                    movie.watched = !movie.watched;
+                    renderMovies();
+                });
+
+                const remove = document.createElement("button");
+                remove.className = "delete-btn";
+                remove.textContent = "Delete";
+
+                remove.addEventListener("click", function() {
+                    movieList.splice(index, 1);
+                    renderMovies();
+                });
+
+                info.append(
+                    title, genre, rating, actor,
+                    director, status, toggle, remove
+                );
+
+                card.append(poster, info);
+                list.appendChild(card);
+            });
+        }
+
+        renderMovies();
+    </script>
+
+</body>
+</html>
+
+</body>
+</html>

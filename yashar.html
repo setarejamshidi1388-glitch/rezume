@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+        const BookList = [ ]
+        function addBook(){
+            const name = prompt("Enter Name")
+            const author = prompt("Enter Author")
+            const price = prompt("Enter price")
+            const data = {
+                name : name , 
+                author : author ,
+                price : price
+            }
+            BookList.push(data)
+        }
+
+        addBook()
+        addBook()
+        addBook()
+
+        console.log(BookList);
+        
+
+
+   </script>
+</body>
+</html>

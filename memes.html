@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="" id="img"   alt="" width="200">
+    <input type="text"  oninput="changeText(this)">
+    <h1 id="myText"></h1>
+    <button onclick="nextimg()">NEXT</button>
+    <script>
+        const memes = [ ]
+        const img = document.getElementById('img')
+        fetch('https://api.imgflip.com/get_memes').then( (res)=>{
+            return res.json()
+        }
+        ).then((data)=>{
+            data.data.memes.forEach(( item ) =>{
+                memes.push(item.url)
+            } )
+        })
+        
+        function nextimg(){
+            let num = Math.ceil( Math.random() *100)
+            img.src = memes[num]
+
+        }
+        function changeText(inpout){
+            document.getElementById("myText").innerText = inpout.value
+        }
+
+    </script>
+</body>
+</html>

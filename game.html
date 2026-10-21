@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body  style="display: flex; justify-content: space-evenly;">
+
+    <div class="">
+        <h3>my point is</h3>
+        <h2 id="userPoint"></h2>
+        <div id="userCards">
+            
+        </div>
+    </div>
+        <button id="hitMeBtn" onclick="getcard( )"> HIT ME</button>
+        <button  id="imDoneBtn" onclick="getcard( )"> I'm Done</button>
+
+        <div class="">
+        <h3>system point is</h3>
+        <h2 id="systemPoint"></h2>
+        <div id="systemCards">
+    
+        </div>
+
+    </div>
+
+    <script>
+        const hitMeBtn = document.getElementById("hitMeBtn")
+        const imDone= document.getElementById("imDone")
+
+        const userPointElement = document.getElementById("userPoint")
+        const userCardsElement = document.getElementById("userCards")
+
+        const systemPointElemnt = document.getElementById("systemPoint")
+        const systemCardElement = document.getElementById("systemCards")
+        const cards = [ 1 , 2 , 3 , 4 , 5 , 6 , 7 ,8 , 9 , 10 , 'J' , 'Q' , 'K' , 'A']
+        let userPoint = 0
+        let userCards =[ ]
+
+        let systemPoint = 0
+        let systemCards = [ ]
+
+        function getcard( player = 'user'){
+            let randomNumber = Math.ceil(Math.random( ) * 12)
+            let randomCard = cards[randomNumber]
+            let point = 0
+            if ( randomCard == "A"){
+                point += 11
+            }else if (  ( randomCard == "K") || ( randomCard =="Q") || ( randomCard == "J")){
+                point +=10
+            }else{
+                point = randomCard
+            }
+            if ( player == "user" ){
+                userPoint += point
+                userCards.push( randomCard )
+                userPointElement.innerText = userPoint
+                userCardsElement.innerHTML = ""
+                userCards.forEach( ( card )=>{
+                    userCardsElement.innerHTML += `<h1>${card}</h1>`
+                })
+            }else{
+                systemPoint +=point
+                systemCards.push( randomCard)
+                systemPointElemnt.innerText = systemPoint
+                systemCardElement.innerHTML = ""
+                systemCards.forEach( (card)=>{
+                    systemCardElement.innerHTML += `<h1>${card}</h1>`
+                })
+            }
+        }
+        getcard ()
+        getcard()
+
+
+        
+        function imDone(){
+            getcard ( 'system')
+            getcard('system')
+            hitMeBtn.Disabled = true
+            imDoneBtn.Disabled = true
+            if( (systemPoint < userPoint ) && ( userPoint <21) ){
+                setTimeout(()=>{
+                    getcard("system")
+                } , 1000)
+            }
+            
+        }
+        
+
+
+    </script>
+</body>
+</html>

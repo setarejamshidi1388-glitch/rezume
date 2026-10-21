@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item{
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <ol id="myList">
+    </ol>
+    <input type="text" id="newStudent">
+    <button onclick="addToList()"> </button>
+    <script>
+      const myList = document.getElementById("myList")
+      const students = [ 'Ali' , 'Ahmad' , 'Amir' , 'hessam' , 'Mammad']
+        showList()
+        function showList(){
+            myList.innerHTML =``
+            students.forEach((item , index)=>{
+                myList.innerHTML +=`
+                    <li class="item"
+                        <h3>
+                            ${ item }
+                        </h3>
+                        <button onclick="deleteItem"(${index})
+                            remove
+                        </button>
+                    </li>
+                `
+            })
+            function deleteitem( index){
+                students.splice( index ,1)
+                console.log();
+                
+            }
+        }
+        function addToList(){
+            const newStudent = document.getElementById("newStudent").value
+            students.push(newStudent)
+            showList()
+        }
+    </script>
+</body>
+</html>

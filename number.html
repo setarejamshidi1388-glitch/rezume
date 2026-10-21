@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        alert(  Math.ceil() * 100)
+        const systemNumber = Math.ceil(Math.random( ) * 100)
+        const userNumer = prompt("Enter your number")
+        while(true){
+            if (userNumer > systemNumber){
+                alert(`bigger than ${userNumer}`)
+                break
+            }else if ( userNumer < systemNumber){
+                alert(`lower than ${userNumer}`)
+            }
+            else{
+                alert("You win")
+            }   
+        }
+    </script>
+</body>
+</html>
